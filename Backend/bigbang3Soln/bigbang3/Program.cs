@@ -42,6 +42,7 @@ namespace bigbang3
             builder.Services.AddScoped<IRepo<Agent, string>, AgentRepo>();
             builder.Services.AddScoped<IRepo<Traveller,string>, TravellerRepo>();
             builder.Services.AddScoped<ITokenGenerate, TokenService>();
+            builder.Services.AddScoped<IAdminService, AdminService>();
 
 
             builder.Services.AddSwaggerGen(c =>

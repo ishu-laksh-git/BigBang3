@@ -4,6 +4,7 @@ using bigbang3.Models.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq.Expressions;
+using System.Numerics;
 
 namespace bigbang3.Controllers
 {
@@ -15,14 +16,17 @@ namespace bigbang3.Controllers
         private readonly IRepo<User, string> _userRepo;
         private readonly IRepo<Traveller, string> _travellerRepo;
         private readonly IRepo<Agent, string> _agentRepo;
+        private readonly IAdminService _adminService;
 
-        public UserController(IService userService, IRepo<User,string> userRepo,
-                              IRepo<Traveller,string> travellerRepo,IRepo<Agent,string> agentRepo)
+        public UserController(IService userService, IRepo<User, string> userRepo,
+                              IRepo<Traveller, string> travellerRepo, IRepo<Agent, string> agentRepo
+                             ,IAdminService adminService)
         {
             _agentRepo = agentRepo;
             _userService = userService;
             _userRepo = userRepo;
             _travellerRepo = travellerRepo;
+            _adminService = adminService;
         }
 
         [HttpPost]
@@ -38,7 +42,8 @@ namespace bigbang3.Controllers
                     return Created("Registered! :)", agent);
                 return BadRequest("Unable to register");
             }
-            catch (Exception) {
+            catch (Exception)
+            {
                 return BadRequest("Network error!");
             }
         }
@@ -80,6 +85,70 @@ namespace bigbang3.Controllers
             catch (Exception)
             {
                 return BadRequest("Network error...Please try later");
+            }
+        }
+
+        [HttpPut]
+        [ProducesResponseType(typeof(Agent), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]//Failure Response
+        public async Task<ActionResult<Agent?>> UpdateAgentStatus(StatusDTO status)
+        {
+            try
+            {
+                var agent = await _adminService.UpdateStatus(status);
+                if(agent != null)
+                {
+                    return Ok(agent);
+                }
+                return BadRequest("Not updated!");
+            }
+            catch(Exception)
+            {
+                return BadRequest("Backend error!");
+            }
+        }
+
+        [HttpGet]
+        [ProducesResponseType(typeof(List<Agent>), StatusCodes.Status200OK)]//Success Response
+        [ProducesResponseType(StatusCodes.Status404NotFound)]//Failure Response
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+        public async Task<ActionResult<ICollection<Agent>>> GetAllAgents()
+        {
+            try
+            {
+                var agents = await _travellerRepo.GetAll();
+                if(agents != null)
+                {
+                    return Ok(agents);
+                }
+                return BadRequest("No Agents available :(");
+            }
+            catch(Exception)
+            {
+                return BadRequest("Database error");
+            }
+        }
+
+        [HttpGet]
+        [ProducesResponseType(typeof(Agent), StatusCodes.Status200OK)]//Success Response
+        [ProducesResponseType(StatusCodes.Status404NotFound)]//Failure Response
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+        public async Task<ActionResult<Agent>> GetAgent(string email)
+        {
+            try
+            {
+                var agent = await _agentRepo.Get(email);
+                if(agent != null)
+                {
+                    return Ok(agent);
+                }
+                return BadRequest("No agent found :(");
+            }
+            catch(Exception)
+            {
+                return BadRequest("Database error");
             }
         }
 
