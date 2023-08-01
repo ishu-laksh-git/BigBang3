@@ -1,11 +1,23 @@
 {
   "Version": 1,
-  "Hash": "W0MwBugHxhHAIqp4AMGyG6m/HDy3WUZdo/PKnVYeLCY=",
+  "Hash": "dyQLwsVFnc62Ds9932QsTe5HZiizO9XURqyPQaSUWE0=",
   "Source": "bigbang3",
   "BasePath": "_content/bigbang3",
   "Mode": "Default",
   "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "F:\\BigBang3\\Backend\\bigbang3Soln\\TourPackagesAPI\\TourPackagesAPI.csproj",
+      "Version": 2,
+      "Source": "TourPackagesAPI",
+      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
+    }
+  ],
   "DiscoveryPatterns": [],
   "Assets": []
 }

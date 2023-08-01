@@ -117,7 +117,7 @@ namespace bigbang3.Controllers
         {
             try
             {
-                var agents = await _travellerRepo.GetAll();
+                var agents = await _agentRepo.GetAll();
                 if(agents != null)
                 {
                     return Ok(agents);
@@ -152,5 +152,47 @@ namespace bigbang3.Controllers
             }
         }
 
+        [HttpGet]
+        [ProducesResponseType(typeof(List<Traveller>), StatusCodes.Status200OK)]//Success Response
+        [ProducesResponseType(StatusCodes.Status404NotFound)]//Failure Response
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+        public async Task<ActionResult<ICollection<Agent>>> GetAllTravellers()
+        {
+            try
+            {
+                var agents = await _travellerRepo.GetAll();
+                if (agents != null)
+                {
+                    return Ok(agents);
+                }
+                return BadRequest("No travellers available :(");
+            }
+            catch (Exception)
+            {
+                return BadRequest("Database error");
+            }
+        }
+        [HttpGet]
+        [ProducesResponseType(typeof(Agent), StatusCodes.Status200OK)]//Success Response
+        [ProducesResponseType(StatusCodes.Status404NotFound)]//Failure Response
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+        public async Task<ActionResult<Agent>> GetTraveller(string email)
+        {
+            try
+            {
+                var traveller = await _travellerRepo.Get(email);
+                if (traveller != null)
+                {
+                    return Ok(traveller);
+                }
+                return BadRequest("No agent found :(");
+            }
+            catch (Exception)
+            {
+                return BadRequest("Database error");
+            }
+        }
     }
 }

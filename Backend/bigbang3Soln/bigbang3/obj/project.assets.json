@@ -888,6 +888,22 @@
             "rid": "win"
           }
         }
+      },
+      "TourPackagesAPI/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Swashbuckle.AspNetCore": "6.2.3"
+        },
+        "compile": {
+          "bin/placeholder/TourPackagesAPI.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TourPackagesAPI.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       }
     }
   },
@@ -2261,6 +2277,11 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "TourPackagesAPI/1.0.0": {
+      "type": "project",
+      "path": "../TourPackagesAPI/TourPackagesAPI.csproj",
+      "msbuildProject": "../TourPackagesAPI/TourPackagesAPI.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -2268,7 +2289,8 @@
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.16",
       "Microsoft.EntityFrameworkCore.SqlServer >= 6.0.16",
       "Microsoft.EntityFrameworkCore.Tools >= 6.0.16",
-      "Swashbuckle.AspNetCore >= 6.2.3"
+      "Swashbuckle.AspNetCore >= 6.2.3",
+      "TourPackagesAPI >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -2278,11 +2300,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Welcome\\source\\repos\\bigbang3Soln\\bigbang3\\bigbang3.csproj",
+      "projectUniqueName": "F:\\BigBang3\\Backend\\bigbang3Soln\\bigbang3\\bigbang3.csproj",
       "projectName": "bigbang3",
-      "projectPath": "C:\\Users\\Welcome\\source\\repos\\bigbang3Soln\\bigbang3\\bigbang3.csproj",
+      "projectPath": "F:\\BigBang3\\Backend\\bigbang3Soln\\bigbang3\\bigbang3.csproj",
       "packagesPath": "C:\\Users\\Welcome\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Welcome\\source\\repos\\bigbang3Soln\\bigbang3\\obj\\",
+      "outputPath": "F:\\BigBang3\\Backend\\bigbang3Soln\\bigbang3\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -2303,7 +2325,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "F:\\BigBang3\\Backend\\bigbang3Soln\\TourPackagesAPI\\TourPackagesAPI.csproj": {
+              "projectPath": "F:\\BigBang3\\Backend\\bigbang3Soln\\TourPackagesAPI\\TourPackagesAPI.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
