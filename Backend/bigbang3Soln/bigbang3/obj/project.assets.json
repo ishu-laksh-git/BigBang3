@@ -893,6 +893,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "6.0.16",
+          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.16",
           "Swashbuckle.AspNetCore": "6.2.3"
         },
         "compile": {

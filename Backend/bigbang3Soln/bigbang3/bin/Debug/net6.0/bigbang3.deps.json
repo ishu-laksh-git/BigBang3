@@ -507,6 +507,8 @@
       },
       "TourPackagesAPI/1.0.0": {
         "dependencies": {
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "6.0.16",
+          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.16",
           "Swashbuckle.AspNetCore": "6.2.3"
         },
         "runtime": {
