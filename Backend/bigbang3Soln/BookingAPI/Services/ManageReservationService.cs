@@ -1,47 +1,35 @@
 ﻿using BookingAPI.Interfaces;
 using BookingAPI.Models;
+using BookingAPI.Models.DTO;
 
 namespace BookingAPI.Services
 {
     public class ManageReservationService : IManageBooking
     {
-        private readonly IRepo<Available,int> _availableRepo;
+        private readonly IAvailableRepo _availableRepo;
         private readonly IRepo<OtherTravellers,int> _otherTravellersRepo;
         private readonly IRepo<Reservation,int> _reservationRepo;
-        public ManageReservationService(IRepo<Available, int> availableRepo, IRepo<OtherTravellers, int> otherTravellerRepo, IRepo<Reservation, int> reservationRepo)
+        public ManageReservationService(IAvailableRepo availableRepo, IRepo<OtherTravellers, int> otherTravellerRepo, IRepo<Reservation, int> reservationRepo)
         {
             _availableRepo = availableRepo;
             _reservationRepo = reservationRepo;
             _otherTravellersRepo = otherTravellerRepo;
         }
-        public async Task<Reservation?> AddReservation(Reservation reservation,int Count)
+        
+        public async Task<Available> GetAvailableByPackageId(int id)
         {
             try
             {
-                if (reservation.Type == "Private" || reservation.Type == "private")
+                var availableItems = await _availableRepo.GetAll();
+                if (availableItems == null)
                 {
-                    var res = await _reservationRepo.Add(reservation);
-                    if (res == null)
-                        return null;
-                    return res;
-                }
-                if (Count != 0) {
-                    var tCount = reservation.TravellerCount;
-                    var id = reservation.packageId;
-                    Count = Count - tCount;
-                    if (Count >= 0)
-                    {
-                        var updated_availability = await UpdateCount(id,Count);
-                        var res = await _reservationRepo.Add(reservation);
-                        if(res == null) return null;
-                        return res;
-                    }
                     return null;
-                    
                 }
-                return null;
+
+                return availableItems.FirstOrDefault(item => item.packageId == id);
             }
-            catch(Exception) {
+            catch (Exception)
+            {
                 throw new Exception();
             }
         }
@@ -100,25 +88,8 @@ namespace BookingAPI.Services
             }
         }
 
-        public async Task<Available> UpdateCount(int id,int count)
-        {
-            try
-            {
-                var available = await _availableRepo.Get(id);
-                if (available == null)
-                {
-                    throw new InvalidOperationException("Available entry not found.");
-                }
+        
 
-                available.AvailableCount = count;
-                var updatedAvailable = await _availableRepo.Update(available);
 
-                return updatedAvailable;
-            }
-            catch (Exception)
-            {
-                throw new Exception("Failed to update available count.");
-            }
-        }
     }
 }

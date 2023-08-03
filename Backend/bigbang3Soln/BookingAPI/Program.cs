@@ -1,4 +1,6 @@
+using BookingAPI.Interfaces;
 using BookingAPI.Models;
+using BookingAPI.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -34,7 +36,10 @@ namespace BookingAPI
                         ValidateAudience = false
                     };
                 });
-
+            builder.Services.AddScoped<IRepo<Reservation, int>, ReservationRepo>();
+            builder.Services.AddScoped<IAvailableRepo, AvailableRepo>();
+            builder.Services.AddScoped<IRepo<OtherTravellers, int>, OtherTravellersRepo>();
+            builder.Services.AddScoped<IManageBooking, ManageReservationService>();
             builder.Services.AddSwaggerGen(c =>
             {
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme

@@ -1,10 +1,11 @@
 ﻿using BookingAPI.Interfaces;
 using BookingAPI.Models;
+using BookingAPI.Models.DTO;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookingAPI.Services
 {
-    public class AvailableRepo : IRepo<Available,int>
+    public class AvailableRepo : IAvailableRepo
     {
         private readonly Context _context;
         public AvailableRepo(Context context)
@@ -84,16 +85,17 @@ namespace BookingAPI.Services
             }
         }
 
-        public async Task<Available?> Update(Available item)
+
+
+        public async Task<Available?> Update(availableDTO item)
         {
-            var spot = _context.Availables.SingleOrDefault(s => s.AvailableId == item.AvailableId);
+            var spot = _context.Availables.SingleOrDefault(s => s.packageId == item.packageId);
             if (spot != null)
             {
                 try
                 {
-                    spot.AvailableCount=item.AvailableCount;
-                    spot.packageId=item.packageId;
-                    spot.AgencyId=item.AgencyId;
+                    spot.AvailableCount = item.AvailableCount;
+                    spot.packageId = item.packageId;
                     await _context.SaveChangesAsync();
                     return spot;
                 }
@@ -104,6 +106,5 @@ namespace BookingAPI.Services
             }
             return null;
         }
-
     }
 }
