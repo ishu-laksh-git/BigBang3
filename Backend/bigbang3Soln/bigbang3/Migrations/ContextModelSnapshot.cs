@@ -24,11 +24,8 @@ namespace bigbang3.Migrations
 
             modelBuilder.Entity("bigbang3.Models.Agent", b =>
                 {
-                    b.Property<int>("TravelId")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("AgentId")
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TravelId"), 1L, 1);
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
@@ -60,12 +57,7 @@ namespace bigbang3.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UsersUserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("TravelId");
-
-                    b.HasIndex("UsersUserId");
+                    b.HasKey("AgentId");
 
                     b.ToTable("Agents");
                 });
@@ -73,10 +65,7 @@ namespace bigbang3.Migrations
             modelBuilder.Entity("bigbang3.Models.Traveller", b =>
                 {
                     b.Property<int>("TravellerId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TravellerId"), 1L, 1);
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
@@ -96,12 +85,7 @@ namespace bigbang3.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UsersUserId")
-                        .HasColumnType("int");
-
                     b.HasKey("TravellerId");
-
-                    b.HasIndex("UsersUserId");
 
                     b.ToTable("Travellers");
                 });
@@ -115,6 +99,7 @@ namespace bigbang3.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"), 1L, 1);
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("PasswordHash")
@@ -129,23 +114,15 @@ namespace bigbang3.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = 1,
-                            Email = "admin@gmail.com",
-                            PasswordHash = new byte[] { 60, 214, 218, 121, 37, 39, 106, 200, 180, 137, 171, 202, 170, 153, 8, 2, 168, 148, 237, 168, 170, 167, 215, 50, 254, 254, 193, 144, 20, 109, 224, 25, 30, 29, 133, 147, 73, 87, 21, 127, 197, 215, 245, 205, 8, 82, 167, 140, 181, 91, 64, 212, 13, 19, 234, 112, 190, 82, 205, 113, 137, 132, 250, 229 },
-                            PasswordKey = new byte[] { 197, 85, 94, 35, 55, 151, 160, 17, 9, 242, 232, 254, 97, 37, 99, 101, 20, 96, 118, 12, 78, 213, 105, 102, 70, 127, 40, 92, 72, 193, 70, 153, 110, 40, 113, 8, 72, 123, 97, 248, 21, 31, 0, 150, 251, 139, 0, 173, 134, 83, 202, 226, 120, 129, 12, 95, 68, 190, 72, 87, 16, 226, 40, 113, 35, 224, 55, 35, 19, 114, 34, 251, 107, 84, 78, 153, 44, 2, 27, 149, 21, 47, 143, 180, 182, 139, 2, 149, 200, 180, 94, 23, 165, 98, 69, 214, 251, 243, 3, 57, 11, 47, 171, 141, 205, 225, 149, 129, 3, 19, 178, 174, 80, 189, 179, 82, 90, 74, 71, 220, 217, 181, 143, 24, 148, 216, 172, 229 },
-                            Role = "Admin"
-                        });
                 });
 
             modelBuilder.Entity("bigbang3.Models.Agent", b =>
                 {
                     b.HasOne("bigbang3.Models.User", "Users")
                         .WithMany()
-                        .HasForeignKey("UsersUserId");
+                        .HasForeignKey("AgentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Users");
                 });
@@ -154,7 +131,9 @@ namespace bigbang3.Migrations
                 {
                     b.HasOne("bigbang3.Models.User", "Users")
                         .WithMany()
-                        .HasForeignKey("UsersUserId");
+                        .HasForeignKey("TravellerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Users");
                 });

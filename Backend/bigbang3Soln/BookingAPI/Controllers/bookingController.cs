@@ -1,6 +1,5 @@
 ﻿using BookingAPI.Interfaces;
 using BookingAPI.Models;
-using BookingAPI.Models.DTO;
 using BookingAPI.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +25,7 @@ namespace BookingAPI.Controllers
         {
             try
             {
-                var reservation = _reservationRepo.Add(item);
+                var reservation =await _bookingService.AddReseration(item);
                 if(reservation != null) {
                     return Created("Added :)", reservation);
                 }
@@ -47,10 +46,10 @@ namespace BookingAPI.Controllers
         {
             try
             {
-                var available = await _reservationRepo.Update(item);
-                if (available != null)
+                var res = await _reservationRepo.Update(item);
+                if (res != null)
                 {
-                    return Ok(available);
+                    return Ok(res);
                 }
                 return BadRequest("Not updated");
             }
@@ -69,12 +68,12 @@ namespace BookingAPI.Controllers
         {
             try
             {
-                var availableItem = await _reservationRepo.Get(id);
-                if (availableItem != null)
+                var resItem = await _reservationRepo.Get(id);
+                if (resItem != null)
                 {
-                    return Ok(availableItem);
+                    return Ok(resItem);
                 }
-                return BadRequest("No available found :(");
+                return BadRequest("No reservations found :(");
             }
             catch (Exception)
             {
@@ -91,12 +90,12 @@ namespace BookingAPI.Controllers
         {
             try
             {
-                var itenaryItem = await _reservationRepo.GetAll();
-                if (itenaryItem != null)
+                var reservations = await _reservationRepo.GetAll();
+                if (reservations != null)
                 {
-                    return Ok(itenaryItem);
+                    return Ok(reservations);
                 }
-                return BadRequest("No itenary available :(");
+                return BadRequest("No reservations available :(");
             }
             catch (Exception)
             {
@@ -109,14 +108,14 @@ namespace BookingAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]//Failure Response
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-        public async Task<ActionResult<ICollection<Reservation>>> GetReservationsByTraveller(int id)
+        public async Task<ActionResult<ICollection<Reservation>>> GetReservationsByTraveller(string id)
         {
             try
             {
-                var itenaryItem = await _bookingService.GetGuestsByTravellerid(id);
-                if (itenaryItem != null)
+                var resItem = await _bookingService.GetReservationByTravellerEmail(id);
+                if (resItem != null)
                 {
-                    return Ok(itenaryItem);
+                    return Ok(resItem);
                 }
                 return BadRequest("No tour available :(");
             }
@@ -126,26 +125,5 @@ namespace BookingAPI.Controllers
             }
         }
 
-        [HttpGet]
-        [ProducesResponseType(typeof(List<Reservation>), StatusCodes.Status200OK)]//Success Response
-        [ProducesResponseType(StatusCodes.Status404NotFound)]//Failure Response
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-
-        public async Task<ActionResult<ICollection<Reservation>>> GetReservationsByPackage(int id)
-        {
-            try
-            {
-                var itenaryItem = await _bookingService.GetAvailableByPackageId(id);
-                if (itenaryItem != null)
-                {
-                    return Ok(itenaryItem);
-                }
-                return BadRequest("No tour available :(");
-            }
-            catch (Exception)
-            {
-                return BadRequest("Database error");
-            }
-        }
     }
 }

@@ -9,21 +9,6 @@ namespace BookingAPI.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Availables",
-                columns: table => new
-                {
-                    AvailableId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    packageId = table.Column<int>(type: "int", nullable: false),
-                    AgencyId = table.Column<int>(type: "int", nullable: true),
-                    AvailableCount = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Availables", x => x.AvailableId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Reservations",
                 columns: table => new
                 {
@@ -32,12 +17,11 @@ namespace BookingAPI.Migrations
                     packageId = table.Column<int>(type: "int", nullable: false),
                     AgencyId = table.Column<int>(type: "int", nullable: true),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TravellerId = table.Column<int>(type: "int", nullable: true),
+                    availableCount = table.Column<int>(type: "int", nullable: true),
+                    travellerEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TravellerCount = table.Column<int>(type: "int", nullable: false),
                     PickUp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Drop = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Price = table.Column<int>(type: "int", nullable: true),
-                    TotalPrice = table.Column<int>(type: "int", nullable: true)
+                    Drop = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -51,27 +35,34 @@ namespace BookingAPI.Migrations
                     OtherTravellerId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     packageId = table.Column<int>(type: "int", nullable: true),
-                    TravellerId = table.Column<int>(type: "int", nullable: true),
-                    AgencyId = table.Column<int>(type: "int", nullable: true),
+                    travellerEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ReservationId = table.Column<int>(type: "int", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     age = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tour_Travellers", x => x.OtherTravellerId);
+                    table.ForeignKey(
+                        name: "FK_Tour_Travellers_Reservations_ReservationId",
+                        column: x => x.ReservationId,
+                        principalTable: "Reservations",
+                        principalColumn: "ReservationId");
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tour_Travellers_ReservationId",
+                table: "Tour_Travellers",
+                column: "ReservationId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Availables");
+                name: "Tour_Travellers");
 
             migrationBuilder.DropTable(
                 name: "Reservations");
-
-            migrationBuilder.DropTable(
-                name: "Tour_Travellers");
         }
     }
 }

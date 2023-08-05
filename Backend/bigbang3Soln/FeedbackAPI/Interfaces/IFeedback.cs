@@ -8,5 +8,6 @@ namespace FeedbackAPI.Interfaces
         public Task<feedback?> DeleteReview(int id);
         public Task<feedback?> GetReview(int id);
         public Task<ICollection<feedback>?> GetAllReviews();
+
     }
 }

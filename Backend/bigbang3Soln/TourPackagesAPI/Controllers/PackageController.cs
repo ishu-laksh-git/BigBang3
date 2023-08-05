@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TourPackagesAPI.Interfaces;
 using TourPackagesAPI.Models;
+using TourPackagesAPI.Models.DTO;
 
 namespace TourPackagesAPI.Controllers
 {
@@ -87,7 +88,7 @@ namespace TourPackagesAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]//Failure Response
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-        public async Task<ActionResult<packages>> DeleteReview(int id)
+        public async Task<ActionResult<packages>> DeletePackage(int id)
         {
             try
             {
@@ -109,7 +110,7 @@ namespace TourPackagesAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]//Failure Response
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-        public async Task<ActionResult<packages>> UpdateReview(packages item)
+        public async Task<ActionResult<packages>> UpdatePackage(packages item)
         {
             try
             {
@@ -145,6 +146,28 @@ namespace TourPackagesAPI.Controllers
             catch (Exception)
             {
                 return BadRequest("Database error");
+            }
+        }
+
+        [HttpPut]
+        [ProducesResponseType(typeof(packages), StatusCodes.Status200OK)]//Success Response
+        [ProducesResponseType(StatusCodes.Status404NotFound)]//Failure Response
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+        public async Task<ActionResult<packages>> UpdateAvailableCount(UpdateAvailableDTO availableDTO)
+        {
+            try
+            {
+                var tourpackage = await _service.UpdateAvailable(availableDTO);
+                if (tourpackage != null)
+                {
+                    return Ok(tourpackage);
+                }
+                return BadRequest("Not updated");
+            }
+            catch (Exception)
+            {
+                return BadRequest("Backend error");
             }
         }
     }

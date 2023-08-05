@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\BigBang3\\Backend\\bigbang3Soln\\FeedbackAPI\\FeedbackAPI.csproj": {}
+    "F:\\BigBangThree\\Backend\\bigbang3Soln\\FeedbackAPI\\FeedbackAPI.csproj": {}
   },
   "projects": {
-    "F:\\BigBang3\\Backend\\bigbang3Soln\\FeedbackAPI\\FeedbackAPI.csproj": {
+    "F:\\BigBangThree\\Backend\\bigbang3Soln\\FeedbackAPI\\FeedbackAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\BigBang3\\Backend\\bigbang3Soln\\FeedbackAPI\\FeedbackAPI.csproj",
+        "projectUniqueName": "F:\\BigBangThree\\Backend\\bigbang3Soln\\FeedbackAPI\\FeedbackAPI.csproj",
         "projectName": "FeedbackAPI",
-        "projectPath": "F:\\BigBang3\\Backend\\bigbang3Soln\\FeedbackAPI\\FeedbackAPI.csproj",
+        "projectPath": "F:\\BigBangThree\\Backend\\bigbang3Soln\\FeedbackAPI\\FeedbackAPI.csproj",
         "packagesPath": "C:\\Users\\Welcome\\.nuget\\packages\\",
-        "outputPath": "F:\\BigBang3\\Backend\\bigbang3Soln\\FeedbackAPI\\obj\\",
+        "outputPath": "F:\\BigBangThree\\Backend\\bigbang3Soln\\FeedbackAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

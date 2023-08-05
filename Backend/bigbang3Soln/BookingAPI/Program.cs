@@ -37,7 +37,6 @@ namespace BookingAPI
                     };
                 });
             builder.Services.AddScoped<IRepo<Reservation, int>, ReservationRepo>();
-            builder.Services.AddScoped<IAvailableRepo, AvailableRepo>();
             builder.Services.AddScoped<IRepo<OtherTravellers, int>, OtherTravellersRepo>();
             builder.Services.AddScoped<IManageBooking, ManageReservationService>();
             builder.Services.AddSwaggerGen(c =>

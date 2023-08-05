@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "Hash": "dyQLwsVFnc62Ds9932QsTe5HZiizO9XURqyPQaSUWE0=",
+  "Hash": "PnWgL7ixCW2gpzvWT5uUPSEI7xTpI4S9eWwXo4S7bCQ=",
   "Source": "bigbang3",
   "BasePath": "_content/bigbang3",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [
     {
-      "Identity": "F:\\BigBang3\\Backend\\bigbang3Soln\\TourPackagesAPI\\TourPackagesAPI.csproj",
+      "Identity": "F:\\BigBangThree\\Backend\\bigbang3Soln\\TourPackagesAPI\\TourPackagesAPI.csproj",
       "Version": 2,
       "Source": "TourPackagesAPI",
       "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",

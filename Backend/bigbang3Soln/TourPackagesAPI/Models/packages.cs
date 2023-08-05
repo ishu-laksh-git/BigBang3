@@ -16,7 +16,10 @@ namespace TourPackagesAPI.Models
         public string? FoodIncluded { get; set; }
         public string? AccommodationIncluded { get; set; }
         public string? TourType { get; set; }
+        public string? description { get;set; }
+        public int? available { get; set; }
         public int? Price { get; set; }
+        public ICollection<itenary>? itenaries { get; set; }
 
     }
 }

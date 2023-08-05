@@ -13,7 +13,7 @@ namespace BookingAPI.Services
         }
         public async Task<Reservation?> Add(Reservation item)
         {
-            var res = _context.Reservations.SingleOrDefault(r=>r.ReservationId == item.ReservationId);
+            var res = _context.Tour_Travellers.SingleOrDefault(u => u.OtherTravellerId == item.ReservationId);
             if (res == null)
             {
                 try
@@ -54,7 +54,7 @@ namespace BookingAPI.Services
         {
             try
             {
-                var res = await _context.Reservations.SingleOrDefaultAsync(re=> re.ReservationId == id);
+                var res = await _context.Reservations.SingleOrDefaultAsync(u => u.ReservationId == id);
                 if (res == null)
                 {
                     return null;
@@ -86,20 +86,19 @@ namespace BookingAPI.Services
 
         public async Task<Reservation?> Update(Reservation item)
         {
-            var res = _context.Reservations.SingleOrDefault(r=>r.ReservationId == item.ReservationId);
+            var res = _context.Reservations.SingleOrDefault(u => u.ReservationId == item.ReservationId);
             if (res != null)
             {
                 try
                 {
-                    res.TravellerId = item.TravellerId;
-                    res.TravellerCount = item.TravellerCount;
-                    res.packageId= item.packageId;
-                    res.PickUp=item.PickUp;
-                    res.TotalPrice=item.TotalPrice;
-                    res.Drop=item.Drop;
-                    res.AgencyId=item.AgencyId;
-                    res.Type=item.Type;
-                    res.Price=item.Price;
+                    res.travellerEmail = item.travellerEmail;
+                    res.TravellerCount=item.TravellerCount;
+                    res.AgencyId = item.AgencyId;
+                    res.availableCount = item.availableCount;
+                    res.PickUp = item.PickUp;
+                    res.Drop = item.Drop;
+                    res.packageId = item.packageId;
+                    res.Type = item.Type;
                     await _context.SaveChangesAsync();
                     return res;
                 }
@@ -109,6 +108,7 @@ namespace BookingAPI.Services
                 }
             }
             return null;
+        
         }
     }
 }

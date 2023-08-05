@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "dIxHQyCjzFk7L7T/ECtvaoFJlGpqaSJCLuPvtpGfJ/SPFzTOrDW7mlJPIhkPgjAMxa/JD42iS/C26bbbLfJS1A==",
+  "dgSpecHash": "vxowOeKJAyv/joLuTR2LvSdKKPZvy4c2V528l8oKOijdWKmV1Mt+3VLLRHeyxmH2zo279mEFan8lN6T/xZXqIg==",
   "success": true,
-  "projectFilePath": "F:\\BigBang3\\Backend\\bigbang3Soln\\bigbang3\\bigbang3.csproj",
+  "projectFilePath": "F:\\BigBangThree\\Backend\\bigbang3Soln\\bigbang3\\bigbang3.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Welcome\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Welcome\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.16\\microsoft.aspnetcore.authentication.jwtbearer.6.0.16.nupkg.sha512",

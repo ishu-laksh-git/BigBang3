@@ -20,17 +20,5 @@ namespace bigbang3.Models
         public DbSet<Agent> Agents { get; set; }
         public DbSet<Traveller> Travellers { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<User>().HasData(
-                new User
-                {
-                    UserId = 1,
-                    Email = "admin@gmail.com",
-                    PasswordHash = PasswordHash,
-                    PasswordKey = PasswordKey,
-                    Role = "Admin"
-                });
-        }
     }
 }

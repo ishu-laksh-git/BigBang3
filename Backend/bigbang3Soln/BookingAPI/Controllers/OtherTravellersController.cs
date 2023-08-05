@@ -24,10 +24,10 @@ namespace BookingAPI.Controllers
         {
             try
             {
-                var itenaryItem = await _travellerRepo.Add(item);
-                if (itenaryItem != null)
+                var passenger = await _travellerRepo.Add(item);
+                if (passenger != null)
                 {
-                    return Created("Added!", itenaryItem);
+                    return Created("Added!", passenger);
                 }
                 return BadRequest("Unable to add");
             }
@@ -41,14 +41,14 @@ namespace BookingAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]//Failure Response
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-        public async Task<ActionResult<ICollection<OtherTravellers>>> GetAllItenaries()
+        public async Task<ActionResult<ICollection<OtherTravellers>>> GetAllPassengers()
         {
             try
             {
-                var itenaryItem = await _travellerRepo.GetAll();
-                if (itenaryItem != null)
+                var passenger = await _travellerRepo.GetAll();
+                if (passenger != null)
                 {
-                    return Ok(itenaryItem);
+                    return Ok(passenger);
                 }
                 return BadRequest("No extra travellers available :(");
             }
@@ -63,16 +63,16 @@ namespace BookingAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]//Failure Response
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-        public async Task<ActionResult<OtherTravellers>> GetTravellers(int id)
+        public async Task<ActionResult<OtherTravellers>> GetPassenger(int id)
         {
             try
             {
-                var itenaryItem = await _travellerRepo.Get(id);
-                if (itenaryItem != null)
+                var passenger = await _travellerRepo.Get(id);
+                if (passenger != null)
                 {
-                    return Ok(itenaryItem);
+                    return Ok(passenger);
                 }
-                return BadRequest("No extra passenger found :(");
+                return BadRequest("No passenger found :(");
             }
             catch (Exception)
             {
@@ -85,14 +85,14 @@ namespace BookingAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]//Failure Response
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-        public async Task<ActionResult<OtherTravellers>> DeleteItenary(int id)
+        public async Task<ActionResult<OtherTravellers>> DeletePassenger(int id)
         {
             try
             {
-                var review = await _travellerRepo.Delete(id);
-                if (review != null)
+                var passenger = await _travellerRepo.Delete(id);
+                if (passenger != null)
                 {
-                    return Ok(review);
+                    return Ok(passenger);
                 }
                 return BadRequest("Not deleted");
             }
@@ -106,14 +106,14 @@ namespace BookingAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]//Failure Response
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-        public async Task<ActionResult<OtherTravellers>> UpdateItenary(OtherTravellers item)
+        public async Task<ActionResult<OtherTravellers>> UpdatePassengers(OtherTravellers item)
         {
             try
             {
-                var itenaryItem = await _travellerRepo.Update(item);
-                if (itenaryItem != null)
+                var passenger = await _travellerRepo.Update(item);
+                if (passenger != null)
                 {
-                    return Ok(itenaryItem);
+                    return Ok(passenger);
                 }
                 return BadRequest("Not updated");
             }
@@ -128,14 +128,14 @@ namespace BookingAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]//Failure Response
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-        public async Task<ActionResult<ICollection<OtherTravellers>>> GetGuestsbyTraveller(int id)
+        public async Task<ActionResult<ICollection<OtherTravellers>>> GetGuestsbyTraveller(string id)
         {
             try
             {
-                var itenaryItem = await _manageService.GetGuestsByTravellerid(id);
-                if (itenaryItem != null)
+                var passenger = await _manageService.GetGuestsByTravellerEmail(id);
+                if (passenger != null)
                 {
-                    return Ok(itenaryItem);
+                    return Ok(passenger);
                 }
                 return BadRequest("No passengers available :(");
             }

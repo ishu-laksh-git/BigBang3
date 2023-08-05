@@ -9,12 +9,11 @@ namespace BookingAPI.Models
         public int packageId { get; set; }
         public int? AgencyId { get; set; }
         public string? Type { get; set; }
-        public int? TravellerId { get; set; }
+        public int? availableCount { get; set; }
+        public string? travellerEmail { get; set; }
         public int TravellerCount { get; set; }
+        public ICollection<OtherTravellers>? passengers { get; set; }
         public string? PickUp { get; set; }
         public string? Drop { get; set; }
-        public int? Price { get; set; }
-        public int? TotalPrice { get; set; }
-
     }
 }

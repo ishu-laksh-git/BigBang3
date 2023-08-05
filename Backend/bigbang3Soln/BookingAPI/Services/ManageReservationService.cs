@@ -1,40 +1,45 @@
 ﻿using BookingAPI.Interfaces;
 using BookingAPI.Models;
-using BookingAPI.Models.DTO;
 
 namespace BookingAPI.Services
 {
     public class ManageReservationService : IManageBooking
     {
-        private readonly IAvailableRepo _availableRepo;
         private readonly IRepo<OtherTravellers,int> _otherTravellersRepo;
         private readonly IRepo<Reservation,int> _reservationRepo;
-        public ManageReservationService(IAvailableRepo availableRepo, IRepo<OtherTravellers, int> otherTravellerRepo, IRepo<Reservation, int> reservationRepo)
+        public ManageReservationService(IRepo<OtherTravellers, int> otherTravellerRepo, IRepo<Reservation, int> reservationRepo)
         {
-            _availableRepo = availableRepo;
             _reservationRepo = reservationRepo;
             _otherTravellersRepo = otherTravellerRepo;
         }
-        
-        public async Task<Available> GetAvailableByPackageId(int id)
+
+        public async Task<Reservation> AddReseration(Reservation reservation)
         {
             try
             {
-                var availableItems = await _availableRepo.GetAll();
-                if (availableItems == null)
+                if (reservation.Type == "Public" || reservation.Type == "public")
                 {
+                
+                    if(reservation.availableCount>0 && reservation.availableCount >= reservation.TravellerCount)
+                    {
+                        var res = await _reservationRepo.Add(reservation);
+                        if (res != null)
+                            return res;
+                        return null;
+                    }
                     return null;
                 }
-
-                return availableItems.FirstOrDefault(item => item.packageId == id);
+                var res1 = await _reservationRepo.Add(reservation);
+                if (res1 != null) return res1;
+                return null;
             }
             catch (Exception)
             {
-                throw new Exception();
+                return null;
             }
         }
 
-        public async Task<ICollection<OtherTravellers>> GetGuestsByTravellerid(int id)
+        public async Task<ICollection<OtherTravellers>> GetGuestsByTravellerEmail(string id)
         {
             try
             {
@@ -44,7 +49,7 @@ namespace BookingAPI.Services
                     return new List<OtherTravellers>();
                 }
 
-                return guests.Where(g => g.TravellerId == id).ToList();
+                return guests.Where(g => g.travellerEmail == id).ToList();
             }
             catch (Exception)
             {
@@ -70,7 +75,7 @@ namespace BookingAPI.Services
             }
         }
 
-        public async Task<ICollection<Reservation>> GetReservationByTravellerId(int id)
+        public async Task<ICollection<Reservation>> GetReservationByTravellerEmail(string id)
         {
             try
             {
@@ -80,7 +85,7 @@ namespace BookingAPI.Services
                     return new List<Reservation>();
                 }
 
-                return reservations.Where(r => r.TravellerId == id).ToList();
+                return reservations.Where(r => r.travellerEmail == id).ToList();
             }
             catch (Exception)
             {

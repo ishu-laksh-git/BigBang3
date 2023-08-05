@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TourPackagesAPI.Interfaces;
-using TourPackagesAPI.Migrations;
 using TourPackagesAPI.Models;
 
 namespace TourPackagesAPI.Services
@@ -101,8 +100,10 @@ namespace TourPackagesAPI.Services
                     pack.ToDate = item.ToDate;
                     pack.No_Nights=item.No_Nights;
                     pack.TourType=item.TourType;
+                    pack.description=item.description;
                     pack.AccommodationIncluded=item.AccommodationIncluded;
                     pack.FoodIncluded=item.FoodIncluded;
+                    pack.available = item.available;
                     await _context.SaveChangesAsync();
                     return pack;
                 }

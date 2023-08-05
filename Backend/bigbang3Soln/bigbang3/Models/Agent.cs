@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace bigbang3.Models
 {
@@ -10,7 +11,9 @@ namespace bigbang3.Models
             Gender = "Unknown";
         }
         [Key]
-        public int TravelId { get; set; }
+        public int AgentId { get; set; }
+        [ForeignKey("AgentId")]
+        public User? Users { get; set; }
         public string? Name { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string? Gender { get; set; }
@@ -21,6 +24,6 @@ namespace bigbang3.Models
         public string? Address { get; set; }
         public string? IsApproved { get; set; }
         public string? GSTnumber { get; set; }
-        public User? Users { get; set; }
+        
     }
 }

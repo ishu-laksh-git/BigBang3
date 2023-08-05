@@ -92,7 +92,7 @@ namespace FeedbackAPI.Services
             {
                 try
                 {
-                    fb.travellerID = item.travellerID;
+                    fb.travellerEmail = item.travellerEmail;
                     fb.FeedbackDate = item.FeedbackDate;
                     fb.TourPackageId = item.TourPackageId;
                     fb.Ratings = item.Ratings;

@@ -9,7 +9,6 @@ namespace BookingAPI.Models
             
         }
         public DbSet<Reservation> Reservations { get; set; }    
-        public DbSet<Available> Availables { get; set; }
         public DbSet<OtherTravellers> Tour_Travellers { get; set; }
     }
 }

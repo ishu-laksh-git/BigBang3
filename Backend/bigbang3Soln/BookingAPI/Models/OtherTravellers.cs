@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookingAPI.Models
 {
@@ -7,8 +9,9 @@ namespace BookingAPI.Models
         [Key]
         public int OtherTravellerId { get; set; }
         public int? packageId { get; set; }
-        public int? TravellerId { get; set; }
-        public int? AgencyId { get; set; }
+        [ForeignKey("id")]
+        public string? travellerEmail { get; set; }
+        public Reservation? reservation { get; set; }
         public string? Name { get; set; }
         public int? age { get; set; }
     }

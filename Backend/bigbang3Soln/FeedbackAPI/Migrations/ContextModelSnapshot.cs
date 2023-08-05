@@ -45,8 +45,8 @@ namespace FeedbackAPI.Migrations
                     b.Property<int?>("TourPackageId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("travellerID")
-                        .HasColumnType("int");
+                    b.Property<string>("travellerEmail")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("feedbackID");
 

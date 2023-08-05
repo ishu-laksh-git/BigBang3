@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookingAPI.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230802233421_booking")]
+    [Migration("20230805053011_booking")]
     partial class booking
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,28 +24,6 @@ namespace BookingAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("BookingAPI.Models.Available", b =>
-                {
-                    b.Property<int>("AvailableId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AvailableId"), 1L, 1);
-
-                    b.Property<int?>("AgencyId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("AvailableCount")
-                        .HasColumnType("int");
-
-                    b.Property<int>("packageId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AvailableId");
-
-                    b.ToTable("Availables");
-                });
-
             modelBuilder.Entity("BookingAPI.Models.OtherTravellers", b =>
                 {
                     b.Property<int>("OtherTravellerId")
@@ -54,13 +32,10 @@ namespace BookingAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OtherTravellerId"), 1L, 1);
 
-                    b.Property<int?>("AgencyId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TravellerId")
+                    b.Property<int?>("ReservationId")
                         .HasColumnType("int");
 
                     b.Property<int?>("age")
@@ -69,7 +44,12 @@ namespace BookingAPI.Migrations
                     b.Property<int?>("packageId")
                         .HasColumnType("int");
 
+                    b.Property<string>("travellerEmail")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("OtherTravellerId");
+
+                    b.HasIndex("ReservationId");
 
                     b.ToTable("Tour_Travellers");
                 });
@@ -91,27 +71,38 @@ namespace BookingAPI.Migrations
                     b.Property<string>("PickUp")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Price")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TotalPrice")
-                        .HasColumnType("int");
-
                     b.Property<int>("TravellerCount")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TravellerId")
                         .HasColumnType("int");
 
                     b.Property<string>("Type")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("availableCount")
+                        .HasColumnType("int");
+
                     b.Property<int>("packageId")
                         .HasColumnType("int");
+
+                    b.Property<string>("travellerEmail")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ReservationId");
 
                     b.ToTable("Reservations");
+                });
+
+            modelBuilder.Entity("BookingAPI.Models.OtherTravellers", b =>
+                {
+                    b.HasOne("BookingAPI.Models.Reservation", "reservation")
+                        .WithMany("passengers")
+                        .HasForeignKey("ReservationId");
+
+                    b.Navigation("reservation");
+                });
+
+            modelBuilder.Entity("BookingAPI.Models.Reservation", b =>
+                {
+                    b.Navigation("passengers");
                 });
 #pragma warning restore 612, 618
         }

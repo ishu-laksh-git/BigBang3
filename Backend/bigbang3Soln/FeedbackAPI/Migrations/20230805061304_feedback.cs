@@ -15,7 +15,7 @@ namespace FeedbackAPI.Migrations
                 {
                     feedbackID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    travellerID = table.Column<int>(type: "int", nullable: true),
+                    travellerEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TourPackageId = table.Column<int>(type: "int", nullable: true),
                     Comment = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AgencyId = table.Column<int>(type: "int", nullable: true),

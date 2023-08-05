@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "R+bjG73SRfsVDAcKg1bvgr7HE1Tgcj51Gdwl4P3pmeRGirvYasi3pTeuxCW1dMvE9JyGGfQq4Zn+wrNCvvsYBg==",
+  "dgSpecHash": "WzQ7K1akpSD3ZoDDa/rtaeWwxySrQLuHUhKy+ZYAKNKXjafib25pZwzxDeBNvOEvTAO6ZCb2IZseLV6FROAE2A==",
   "success": true,
-  "projectFilePath": "F:\\BigBang3\\Backend\\bigbang3Soln\\TourPackagesAPI\\TourPackagesAPI.csproj",
+  "projectFilePath": "F:\\BigBangThree\\Backend\\bigbang3Soln\\TourPackagesAPI\\TourPackagesAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Welcome\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Welcome\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.16\\microsoft.aspnetcore.authentication.jwtbearer.6.0.16.nupkg.sha512",

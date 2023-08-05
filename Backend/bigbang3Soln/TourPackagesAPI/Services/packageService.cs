@@ -1,6 +1,6 @@
 ﻿using TourPackagesAPI.Interfaces;
-using TourPackagesAPI.Migrations;
 using TourPackagesAPI.Models;
+using TourPackagesAPI.Models.DTO;
 
 namespace TourPackagesAPI.Services
 {
@@ -52,6 +52,23 @@ namespace TourPackagesAPI.Services
             catch (Exception)
             {
                 throw new Exception();
+            }
+        }
+
+        public async Task<packages?> UpdateAvailable(UpdateAvailableDTO availableDTO)
+        {
+            try
+            { 
+                var pack = await _packagesRepo.Get(availableDTO.packageId);
+                if (pack == null) { return null; }
+                pack.available = availableDTO.available;
+                var updatedPack = await _packagesRepo.Update(pack);
+                if (updatedPack == null) { return null; }
+                return updatedPack;
+            }
+            catch (Exception)
+            {
+                return null;
             }
         }
     }

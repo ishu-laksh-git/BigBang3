@@ -2302,11 +2302,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\BigBang3\\Backend\\bigbang3Soln\\bigbang3\\bigbang3.csproj",
+      "projectUniqueName": "F:\\BigBangThree\\Backend\\bigbang3Soln\\bigbang3\\bigbang3.csproj",
       "projectName": "bigbang3",
-      "projectPath": "F:\\BigBang3\\Backend\\bigbang3Soln\\bigbang3\\bigbang3.csproj",
+      "projectPath": "F:\\BigBangThree\\Backend\\bigbang3Soln\\bigbang3\\bigbang3.csproj",
       "packagesPath": "C:\\Users\\Welcome\\.nuget\\packages\\",
-      "outputPath": "F:\\BigBang3\\Backend\\bigbang3Soln\\bigbang3\\obj\\",
+      "outputPath": "F:\\BigBangThree\\Backend\\bigbang3Soln\\bigbang3\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -2328,8 +2328,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "F:\\BigBang3\\Backend\\bigbang3Soln\\TourPackagesAPI\\TourPackagesAPI.csproj": {
-              "projectPath": "F:\\BigBang3\\Backend\\bigbang3Soln\\TourPackagesAPI\\TourPackagesAPI.csproj"
+            "F:\\BigBangThree\\Backend\\bigbang3Soln\\TourPackagesAPI\\TourPackagesAPI.csproj": {
+              "projectPath": "F:\\BigBangThree\\Backend\\bigbang3Soln\\TourPackagesAPI\\TourPackagesAPI.csproj"
             }
           }
         }

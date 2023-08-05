@@ -13,8 +13,8 @@ namespace BookingAPI.Services
         }
         public async Task<OtherTravellers?> Add(OtherTravellers item)
         {
-            var user_mail = _context.Tour_Travellers.SingleOrDefault(u => u.OtherTravellerId == item.OtherTravellerId);
-            if (user_mail == null)
+            var user = _context.Tour_Travellers.SingleOrDefault(u => u.OtherTravellerId == item.OtherTravellerId);
+            if (user == null)
             {
                 try
                 {
@@ -91,9 +91,10 @@ namespace BookingAPI.Services
             {
                 try
                 {
-                    user.AgencyId = item.AgencyId;
                     user.Name = item.Name;
                     user.age = item.age;
+                    user.packageId = item.packageId;
+                    user.travellerEmail = item.travellerEmail;
                     await _context.SaveChangesAsync();
                     return user;
                 }

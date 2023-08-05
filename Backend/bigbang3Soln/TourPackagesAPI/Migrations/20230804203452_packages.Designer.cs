@@ -12,8 +12,8 @@ using TourPackagesAPI.Models;
 namespace TourPackagesAPI.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230802064238_package")]
-    partial class package
+    [Migration("20230804203452_packages")]
+    partial class packages
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -39,12 +39,7 @@ namespace TourPackagesAPI.Migrations
                     b.Property<int>("packageId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("packagespackageId")
-                        .HasColumnType("int");
-
                     b.HasKey("PicId");
-
-                    b.HasIndex("packagespackageId");
 
                     b.ToTable("Galleries");
                 });
@@ -66,12 +61,12 @@ namespace TourPackagesAPI.Migrations
                     b.Property<int>("packageId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("packagespackageId")
+                    b.Property<int?>("packageId1")
                         .HasColumnType("int");
 
                     b.HasKey("itenaryItemId");
 
-                    b.HasIndex("packagespackageId");
+                    b.HasIndex("packageId1");
 
                     b.ToTable("Itenaries");
                 });
@@ -114,6 +109,12 @@ namespace TourPackagesAPI.Migrations
                     b.Property<string>("TourType")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("available")
+                        .HasColumnType("int");
+
+                    b.Property<string>("description")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("destination")
                         .HasColumnType("nvarchar(max)");
 
@@ -122,25 +123,18 @@ namespace TourPackagesAPI.Migrations
                     b.ToTable("Tourpackages");
                 });
 
-            modelBuilder.Entity("TourPackagesAPI.Models.gallery", b =>
-                {
-                    b.HasOne("TourPackagesAPI.Models.packages", null)
-                        .WithMany("Gallery")
-                        .HasForeignKey("packagespackageId");
-                });
-
             modelBuilder.Entity("TourPackagesAPI.Models.itenary", b =>
                 {
-                    b.HasOne("TourPackagesAPI.Models.packages", null)
-                        .WithMany("Itenary")
-                        .HasForeignKey("packagespackageId");
+                    b.HasOne("TourPackagesAPI.Models.packages", "pack")
+                        .WithMany("itenaries")
+                        .HasForeignKey("packageId1");
+
+                    b.Navigation("pack");
                 });
 
             modelBuilder.Entity("TourPackagesAPI.Models.packages", b =>
                 {
-                    b.Navigation("Gallery");
-
-                    b.Navigation("Itenary");
+                    b.Navigation("itenaries");
                 });
 #pragma warning restore 612, 618
         }

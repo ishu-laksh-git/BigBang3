@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FeedbackAPI.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230801183951_feedback")]
+    [Migration("20230805061304_feedback")]
     partial class feedback
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,8 +47,8 @@ namespace FeedbackAPI.Migrations
                     b.Property<int?>("TourPackageId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("travellerID")
-                        .HasColumnType("int");
+                    b.Property<string>("travellerEmail")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("feedbackID");
 
