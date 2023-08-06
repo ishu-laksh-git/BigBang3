@@ -888,24 +888,6 @@
             "rid": "win"
           }
         }
-      },
-      "TourPackagesAPI/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "dependencies": {
-          "Microsoft.AspNetCore.Authentication.JwtBearer": "6.0.16",
-          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.16",
-          "Swashbuckle.AspNetCore": "6.2.3"
-        },
-        "compile": {
-          "bin/placeholder/TourPackagesAPI.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/TourPackagesAPI.dll": {}
-        },
-        "frameworkReferences": [
-          "Microsoft.AspNetCore.App"
-        ]
       }
     }
   },
@@ -2279,11 +2261,6 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
-    },
-    "TourPackagesAPI/1.0.0": {
-      "type": "project",
-      "path": "../TourPackagesAPI/TourPackagesAPI.csproj",
-      "msbuildProject": "../TourPackagesAPI/TourPackagesAPI.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -2291,8 +2268,7 @@
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.16",
       "Microsoft.EntityFrameworkCore.SqlServer >= 6.0.16",
       "Microsoft.EntityFrameworkCore.Tools >= 6.0.16",
-      "Swashbuckle.AspNetCore >= 6.2.3",
-      "TourPackagesAPI >= 1.0.0"
+      "Swashbuckle.AspNetCore >= 6.2.3"
     ]
   },
   "packageFolders": {
@@ -2327,11 +2303,7 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {
-            "F:\\BigBangThree\\Backend\\bigbang3Soln\\TourPackagesAPI\\TourPackagesAPI.csproj": {
-              "projectPath": "F:\\BigBangThree\\Backend\\bigbang3Soln\\TourPackagesAPI\\TourPackagesAPI.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {

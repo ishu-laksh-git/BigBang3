@@ -1,0 +1,47 @@
+.dropdown-options {
+    list-style-type: none;
+    padding: 0;
+    width: 55%;
+    margin: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-top: none;
+    position: absolute;
+    width: 55%;
+    border-radius: 10px;
+    z-index: 10;
+  }
+  
+  .dropdown-option {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .dropdown-option:hover {
+    background-color: #f2f2f2;
+  }
+  
+  .smaller-input {
+    width: 240%;/* Adjust the width as needed */
+  }
+
+  .dropdown-search {
+    position: relative;
+    display: inline-block; /* Allow the input to take up only the necessary space */
+  }
+
+  @media (max-width: 768px) {
+    .dropdown-search {
+      width: 100%; /* Make the search bar take up the full width */
+    }
+  
+    .dropdown-options {
+      width: 100%; /* Make the dropdown options take up the full width */
+      border-radius: 0; /* Remove border-radius */
+    }
+  }
+  
+  
+  
+  
+  

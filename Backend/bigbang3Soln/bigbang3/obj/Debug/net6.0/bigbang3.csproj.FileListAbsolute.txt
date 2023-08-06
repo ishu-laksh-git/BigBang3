@@ -152,9 +152,6 @@ F:\BigBangThree\Backend\bigbang3Soln\bigbang3\obj\Debug\net6.0\bigbang3.dll
 F:\BigBangThree\Backend\bigbang3Soln\bigbang3\obj\Debug\net6.0\refint\bigbang3.dll
 F:\BigBangThree\Backend\bigbang3Soln\bigbang3\obj\Debug\net6.0\bigbang3.pdb
 F:\BigBangThree\Backend\bigbang3Soln\bigbang3\bin\Debug\net6.0\appsettings.Development.json
-F:\BigBangThree\Backend\bigbang3Soln\bigbang3\bin\Debug\net6.0\TourPackagesAPI.deps.json
-F:\BigBangThree\Backend\bigbang3Soln\bigbang3\bin\Debug\net6.0\TourPackagesAPI.runtimeconfig.json
-F:\BigBangThree\Backend\bigbang3Soln\bigbang3\bin\Debug\net6.0\TourPackagesAPI.exe
 F:\BigBangThree\Backend\bigbang3Soln\bigbang3\bin\Debug\net6.0\appsettings.json
 F:\BigBangThree\Backend\bigbang3Soln\bigbang3\bin\Debug\net6.0\bigbang3.exe
 F:\BigBangThree\Backend\bigbang3Soln\bigbang3\bin\Debug\net6.0\bigbang3.deps.json
@@ -202,8 +199,6 @@ F:\BigBangThree\Backend\bigbang3Soln\bigbang3\bin\Debug\net6.0\runtimes\win\lib\
 F:\BigBangThree\Backend\bigbang3Soln\bigbang3\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 F:\BigBangThree\Backend\bigbang3Soln\bigbang3\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 F:\BigBangThree\Backend\bigbang3Soln\bigbang3\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
-F:\BigBangThree\Backend\bigbang3Soln\bigbang3\bin\Debug\net6.0\TourPackagesAPI.dll
-F:\BigBangThree\Backend\bigbang3Soln\bigbang3\bin\Debug\net6.0\TourPackagesAPI.pdb
 F:\BigBangThree\Backend\bigbang3Soln\bigbang3\obj\Debug\net6.0\staticwebassets\msbuild.bigbang3.Microsoft.AspNetCore.StaticWebAssets.props
 F:\BigBangThree\Backend\bigbang3Soln\bigbang3\obj\Debug\net6.0\staticwebassets\msbuild.build.bigbang3.props
 F:\BigBangThree\Backend\bigbang3Soln\bigbang3\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.bigbang3.props

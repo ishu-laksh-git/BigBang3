@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace bigbang3.Migrations
 {
-    public partial class User : Migration
+    public partial class Users : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

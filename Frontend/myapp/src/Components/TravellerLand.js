@@ -6,15 +6,9 @@ import city2 from "../Assets/city2.jpg";
 import forest from "../Assets/forest.jpg";
 import two from "../Assets/two.jpg";
 import logo from "../Assets/logo.png";
-import { useNavigate } from "react-router-dom";
-import {BsInstagram,BsFacebook,BsMap,BsTelephone,BsEnvelope,BsPinMap,BsLinkedin,BsYoutube,BsTwitter} from "react-icons/bs";
+import {BsInstagram,BsFacebook,BsMap,BsTelephone,BsPersonFill,BsEnvelope,BsPinMap,BsLinkedin,BsYoutube,BsTwitter} from "react-icons/bs";
 
-function Home() {
-    const navigate = useNavigate();
-    var login=()=>{
-        navigate("/Login");
-      }
-    
+function TravellerLand() {
     return (
         
         <div className="home-container">
@@ -49,6 +43,12 @@ function Home() {
                             <a className="nav-link" href="#logout">ABOUT US</a>
                         </li>
                     </ul>
+                    
+                </div>
+                <div className="user-img-container">
+                    <span className="navbar-brand home-navbar mb-0 h1">
+                    <a className="nav-link" href="#logout"><BsPersonFill size={50}/></a>
+                    </span>
                 </div>
             </nav>
         
@@ -89,7 +89,7 @@ function Home() {
                             DISCOVER | YOURSELF
                         </p>
                          {/* Sign In button */}
-                         <button className="home-sign-in btn btn-dark text-white btn-lg" onClick={login}>Join the expedition</button>
+                         <button className="home-sign-in btn btn-dark text-white btn-lg">Find destinations</button>
                     </div>
                 </div>
 
@@ -121,4 +121,4 @@ function Home() {
     );
 }
 
-export default Home;
+export default TravellerLand;

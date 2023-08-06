@@ -1,0 +1,15 @@
+.footer {
+    background-color: black;
+    padding: auto;
+    padding:0; /* Adjust the padding to make the footer shorter */
+  }
+  .contact-details {
+    font-size: 14px; /* Adjust the font size as needed */
+    padding: 0; /* Adjust the padding to control the height */
+    margin-bottom: 10px; /* Adjust the margin between sections */
+  }
+  
+  .copywrite-details {
+    font-size: 14px; /* Adjust the font size as needed */
+    padding: 0; /* Adjust the padding to control the height */
+  }

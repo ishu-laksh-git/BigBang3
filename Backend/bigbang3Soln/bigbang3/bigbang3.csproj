@@ -20,8 +20,4 @@
     <Folder Include="Migrations\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\TourPackagesAPI\TourPackagesAPI.csproj" />
-  </ItemGroup>
-
 </Project>

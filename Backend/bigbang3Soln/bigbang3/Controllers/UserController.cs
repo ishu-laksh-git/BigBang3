@@ -1,6 +1,7 @@
 ﻿using bigbang3.Interfaces;
 using bigbang3.Models;
 using bigbang3.Models.DTO;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq.Expressions;
@@ -10,6 +11,7 @@ namespace bigbang3.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [EnableCors("ReactCors")]
     public class UserController : ControllerBase
     {
         private readonly IService _userService;

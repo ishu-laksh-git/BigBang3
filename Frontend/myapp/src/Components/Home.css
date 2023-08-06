@@ -1,3 +1,5 @@
+
+
 .bgIg-container{
 
     position:relative;
@@ -17,32 +19,35 @@
 
   }
 .home-container {
+    
     min-height: 100vh;
     
   }
   
-  .about {
-    flex-grow: 1; /* Allow the section to grow and push the footer to the bottom */
-    padding: 40px;
-  }
-  
-  /* ... */
   
   .footer {
     background-color:black;
-    padding: 10px;
-    text-align: center;
+    bottom:0;
+    
     margin-top: auto; /* Push the footer to the bottom */
   }
 
-  .navbar {
-    padding: 20px;
+  .navbar{
+    padding: 100px;
+    text-align: center;
   }
   
   .navbar-brand {
-    font-size: 24px;
+    padding: 200px;
     font-family: Georgia, 'Times New Roman', Times, serif;
   }
+
+  #home-navbar{
+    padding: 30px;
+    justify-content: center;
+    font-size: 17px;
+  }
+
 
   .home-hero {
     padding: 200px 0;
@@ -65,12 +70,137 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity here (0.5 represents 50% opacity) */
+    min-height: 100vh;
+     /* Adjust the opacity here (0.5 represents 50% opacity) */
   }
 
 .home-sign-in{
     background-color: rgba(0, 0, 0, 0.8);
     border-radius: 5px;
     width: 15%;
+}
+
+.contact-section {
+    display: flex;
+    justify-content: space-between;
+    margin: 50px 0;
+    left:0;   
+}
+
+.carousel-quote-container {
+    position: relative;
+    
+}
+.home-container {
+  position: relative;
+}
+
+.bgIg-container {
+  /* ... existing styles ... */
+  position: relative;
+}
+
+.carousel-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+   /* Adjust the opacity here */
+  z-index: 1;
+}
+
+.carousel-inner {
+  position: relative;
+}
+
+.carousel-quote {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 40px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(247, 246, 246, 0.5);
+  color: white;
+  z-index: 2;
+}
+.quote-overlay {
+    position: absolute;
+    margin-top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.carousel-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 0;
+}
+
+#contact-footer{
+    text-align: left;
+}
+#copywrites{
+    text-align: right;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.home-sign-in {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 40px; /* Adjust padding to control the width */
+    font-size: 16px;
+    cursor: pointer;
+}
+
+
+
+  
+
+@media (min-width: 992px) { /* Adjust the breakpoint to your preferred width */
+    .home-sign-in {
+      width: auto; /* Allow the button to expand based on content */
+      min-width: 200px; /* Set a minimum width to ensure it's not too narrow */
+    }
+    .footer {
+        padding: 0; /* Adjust the padding to make the footer shorter for smaller screens */
+      }
+  }
+
+  @media (max-width: 768px) { /* Adjust the breakpoint to your preferred width */
+    .carousel-quote {
+      font-size: 15px;
+    }
+  
+    .home-sign-in {
+        font-size: auto;
+      font-size: 5px;
+      width: auto; /* Allow the button to expand based on content */
+      min-width: 200px;
+    }
+    .footer {
+        padding: 0; /* Adjust the padding to make the footer shorter for smaller screens */
+      }
+
 }

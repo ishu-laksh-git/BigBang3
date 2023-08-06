@@ -22,6 +22,14 @@ namespace bigbang3
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddCors(opts =>
+            {
+                opts.AddPolicy("ReactCors", options =>
+                {
+                    options.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+                });
+            });
+
             builder.Services.AddDbContext<Context>
                (options => options.UseSqlServer(builder.Configuration.GetConnectionString("Conn")));
 
@@ -82,7 +90,9 @@ namespace bigbang3
                 app.UseSwaggerUI();
             }
 
+            app.UseAuthentication();
             app.UseAuthorization();
+            app.UseCors("ReactCors");
 
 
             app.MapControllers();

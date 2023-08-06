@@ -12,8 +12,8 @@ using bigbang3.Models;
 namespace bigbang3.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230804194037_User")]
-    partial class User
+    [Migration("20230806175651_Users")]
+    partial class Users
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

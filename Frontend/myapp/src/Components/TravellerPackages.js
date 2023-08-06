@@ -1,25 +1,17 @@
 import React from "react";
 import "./Home.css";
-import around from "../Assets/around.jpg";
-import city from "../Assets/city.jpg"
-import city2 from "../Assets/city2.jpg";
-import forest from "../Assets/forest.jpg";
-import two from "../Assets/two.jpg";
 import logo from "../Assets/logo.png";
-import { useNavigate } from "react-router-dom";
 import {BsInstagram,BsFacebook,BsMap,BsTelephone,BsEnvelope,BsPinMap,BsLinkedin,BsYoutube,BsTwitter} from "react-icons/bs";
-
-function Home() {
-    const navigate = useNavigate();
-    var login=()=>{
-        navigate("/Login");
-      }
-    
-    return (
-        
-        <div className="home-container">
-            {/* Navbar */}
-            <nav className="navbar home-navbar navbar-expand-lg navbar-light bg-white" id="home-navbar">
+import { BsPersonFill } from 'react-icons/bs';
+import ListPackages from './ListPackages';
+import DropdownSearch from "./SearchBar";
+import './Travellerpackages.css';
+import './TravellerLand.css';
+function TravellerPackage(){
+    return(
+        <section className="gradient-custom">
+      {/* Navbar */}
+      <nav className="navbar home-navbar navbar-expand-lg navbar-light bg-white" id="home-navbar">
                 <div className="logo-img-container">
                     <span className="navbar-brand home-navbar mb-0 h1">
                         <img src={logo} alt="Logo" className="logo-image" />
@@ -48,54 +40,24 @@ function Home() {
                         <li className="nav-item">
                             <a className="nav-link" href="#logout">ABOUT US</a>
                         </li>
+                        
                     </ul>
                 </div>
-            </nav>
-        
-            <div className="bgIg-container">
-                {/* Carousel with Quote */}
-                <div className="carousel-container">
-                    
-                    <div id="carouselExample" className="carousel slide" data-bs-ride="carousel">
-                        <div className="carousel-inner">
-                        <div className="carousel-item active">
-                                <img src={city} className="d-block w-100" alt="Image 2" />
-                            </div>
-                            <div className="carousel-item">
-                                <img src={city2} className="d-block w-100" alt="Image 2" />
-                            </div>
-                            <div className="carousel-item">
-                                <img src={around} className="d-block w-100" alt="Image 1" />
-                            </div>
-                            <div className="carousel-item">
-                                <img src={two} className="d-block w-100" alt="Image 2" />
-                            </div>
-                            
-                            
-                        </div>
-                        <button className="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span className="visually-hidden">Previous</span>
-                        </button>
-                        <button className="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                            <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span className="visually-hidden">Next</span>
-                        </button>
-                    </div>
-                    <div className="carousel-overlay"></div> {/* Transparent black layer */}
-                    <div className="carousel-quote">
-                        <p>
-                            LOSE | YOURSELF <br />
-                            DISCOVER | YOURSELF
-                        </p>
-                         {/* Sign In button */}
-                         <button className="home-sign-in btn btn-dark text-white btn-lg" onClick={login}>Join the expedition</button>
-                    </div>
+                <div className="user-img-container">
+                    <span className="navbar-brand home-navbar mb-0 h1">
+                    <a className="nav-link" href="#logout"><BsPersonFill size={50}/></a>
+                    </span>
                 </div>
-
-
-            {/* Footer */}
-            <footer className="footer bg-white text-center">
+            </nav>
+             {/* Content */}
+      <div className="content-container">
+        
+        <div className="search">
+          <DropdownSearch />
+          <ListPackages/>
+        </div>
+      </div>
+            <footer className="footer bg-white text-center ">
             <div className="contact-section">
                     <div className="contact-details" id="contact-footer">
                         <h3>Contact us</h3>
@@ -116,9 +78,8 @@ function Home() {
                     </div>
                 </div>
             </footer>
-        </div>
-        </div>
-    );
+            </section>
+    )
 }
 
-export default Home;
+export default TravellerPackage;

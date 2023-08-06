@@ -1,0 +1,6 @@
+.content-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 200px); /* Adjust the value as needed to account for the navbar height */
+}

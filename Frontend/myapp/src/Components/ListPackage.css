@@ -1,0 +1,25 @@
+.package-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px; /* Adjust the margin as needed */
+  }
+  
+  .package-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+  }
+  
+  .package-card h3 {
+    margin-top: 0;
+  }
+  
+  .package-card p:last-child {
+    font-weight: bold;
+  }
+  
