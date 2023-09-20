@@ -24,7 +24,13 @@ namespace BookingAPI
 
             builder.Services.AddDbContext<Context>
                (options => options.UseSqlServer(builder.Configuration.GetConnectionString("Conn")));
-
+            builder.Services.AddCors(opts =>
+            {
+                opts.AddPolicy("AngularCORS", options =>
+                {
+                    options.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+                });
+            });
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -77,8 +83,8 @@ namespace BookingAPI
             }
 
             app.UseAuthorization();
-
-
+            app.UseCors("AngularCORS");
+            app.UseAuthentication();
             app.MapControllers();
 
             app.Run();

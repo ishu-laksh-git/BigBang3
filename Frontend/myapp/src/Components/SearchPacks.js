@@ -1,57 +1,26 @@
 import React, { useEffect, useState } from "react";
-import "./Home.css";
-import IndividualPackages from "./IndividualPackages";
 import logo from "../Assets/logo.png";
-import AddPackageForm from "./AddPackageForm";
-import {BsInstagram,BsFacebook,BsMap,BsTelephone,BsEnvelope,BsPinMap,BsLinkedin,BsYoutube,BsTwitter} from "react-icons/bs";
-import { BsPersonFill,BsPlusCircle } from 'react-icons/bs';
-import "./AgentPackages.css";
-import { Link } from "react-router-dom";
+import "./Home.css";
+import TravellerPacks from "./TravellerPacks";
+import {BsInstagram,BsFacebook,BsMap,BsTelephone,BsPersonFill,BsEnvelope,BsPinMap,BsLinkedin,BsYoutube,BsTwitter} from "react-icons/bs";
 
-function AgentPackages(){
+function SearchPacks(){
 
-    var logOut=()=>{localStorage.clear()};
     const[packages,setpackages]=useState([]);
-    const[agent,setagent]=useState([]);
-    const [isButtonClicked, setIsButtonClicked] = useState(false);
-    const filteredPackages = packages.filter(packages => packages.agencyId === agent.agencyID);
+    const[PPack,setPPack]=useState([]);
+    const [searchInput, setSearchInput] = useState('');
 
 
 
     useEffect(()=>{
         getpackages();
-        getDoc();
+        
       },[]);
 
-      const getDoc = async (doctorId) => {
-        const Agentemail = encodeURIComponent(localStorage.getItem("email")); // Encode the email
-        const url = `http://localhost:5013/api/User/GetAgent?email=${Agentemail}`;
-        fetch(`http://localhost:5013/api/User/GetAgent?email=${Agentemail}`, {
-          method: "GET",
-          headers: {
-            accept: "text/plain",
-            "Content-Type": "application/json",
-            //Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        })
-        .then(async (response) => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-          const myData = await response.json();
-          console.log(myData);
-          setagent(myData);
-          localStorage.setItem("agency status", myData.isApproved);
-          localStorage.setItem("agent name",myData.name);
-          localStorage.setItem("agencyId",myData.agencyID);
-          localStorage.setItem("agentId",myData.agentId);
-          console.log(agent);
-          setIsButtonClicked(true);
-        })
-        .catch((error) => {
-          console.error('Error fetching data:', error);
-        });
-      }
+      const handleSearchInputChange = (value) => {
+        setSearchInput(value);
+      };
+      
 
       const getpackages = () => {
         fetch("http://localhost:5017/api/Package/GetAllPakages", {
@@ -77,6 +46,33 @@ function AgentPackages(){
       });
       }
 
+      const getPackage=()=>{
+        var destination = localStorage.getItem("dest");
+        fetch(`http://localhost:5017/api/Package/GetPackageByDestination?dest=${searchInput}`, {
+          method: "GET",
+          headers: {
+            accept: "text/plain",
+            "Content-Type": "application/json",
+            //Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        })
+        .then(async (response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          const myData = await response.json();
+          console.log(myData);
+          setPPack(myData);
+          localStorage.setItem("agent name",myData.name);
+          localStorage.setItem("agencyId",myData.agencyID);
+          console.log(PPack);
+          
+        })
+        .catch((error) => {
+          console.error('Error fetching data:', error);
+        });
+      }
+
     return(
         <section className="gradient-custom">
       {/* Navbar */}
@@ -98,10 +94,19 @@ function AgentPackages(){
                             <a className="nav-link" href="#add-doctors">PACKAGES</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#logout">LOGOUT</a>
+                            <a className="nav-link" href="#logout">AGENCIES</a>
                         </li>
-                        
+                        <li className="nav-item">
+                            <a className="nav-link" href="#logout">REVIEWS</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="#logout">GALLERY</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" href="#logout">ABOUT US</a>
+                        </li>
                     </ul>
+                    
                 </div>
                 <div className="user-img-container">
                     <span className="navbar-brand home-navbar mb-0 h1">
@@ -109,37 +114,31 @@ function AgentPackages(){
                     </span>
                 </div>
             </nav>
-            <div className="content vh-100">
-                <b className="text-center">Name: {localStorage.getItem("agent name")}</b>
-                <br/>
-                <b className="text-center">Approved Status? : {localStorage.getItem("agency status")}</b>
-                <br/>
-
-                {/* Conditionally render content based on agency status */}
-                {localStorage.getItem("agency status") === "Yes" ? (
-                    <>
-                        <div className="Packs">
-                            <b>Packages:</b>
-                        </div>
-
-                        <div className="GetAll">
-                            {filteredPackages.map((packages, index) => {
-                                return <IndividualPackages key={index} user={packages} />;
+             {/* Doctor List */}
+             <div classname="vh-100 d-flex flex-column align-items-center justify-content-center">
+             <div className="row justify-content-center"><br/>
+                   <b className="row justify-content-center">Search for packages!</b><br/><br/>
+                    <div className="col-md-6">
+                        <form className="input-group search-bar">
+                            <input
+                                type="text"
+                                className="form-control"
+                                placeholder="Where to...?"
+                                value={searchInput}
+                                onChange={(e) => handleSearchInputChange(e.target.value)}                         
+                            />
+                            <button type="submit" className="btn btn-primary">Search</button>
+                        </form>
+                    </div>
+                    <div className="GetAll">
+                            {packages.map((packages, index) => {
+                                return <TravellerPacks key={index} user={packages} />;
                             })}
                         </div>
-
-                        <Link to="/addPack">
-                            <BsPlusCircle size={30} />
-                        </Link>
-                    </>
-                ) : (
-                    <div className="text-center">
-                        <p>You are not approved yet.</p>
-                    </div>
-                )}
+                </div>
+              
             </div>
-
-      
+              
             <footer className="footer bg-white text-center">
             <div className="contact-section">
                     <div className="contact-details" id="contact-footer">
@@ -165,4 +164,4 @@ function AgentPackages(){
     )
 }
 
-export default AgentPackages;
+export default SearchPacks;

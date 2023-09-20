@@ -10,6 +10,7 @@ import AddPackageForm from './Components/AddPackageForm';
 import AgentRegister from './Components/AgentRegister';
 import TravellerRegister from './Components/TravellerReg';
 import AdminViewAgents from './Components/AdminViewAgents';
+import SearchPacks from './Components/SearchPacks';
 import TravellerLand from './Components/TravellerLand';
 import TravellerPackage from './Components/TravellerPackages';
 import { BrowserRouter,Route,Routes } from 'react-router-dom';
@@ -26,9 +27,15 @@ function App() {
        <Route path='adminAgents' element={<AdminViewAgents/>}/> 
        <Route path='agentPacks' element={<AgentPackages/>}/>
        <Route path='Travellerhome' element={<TravellerLand/>}/>
+       <Route path = 'AddPack' element={<AddPackageForm/>}/>
+       <Route path='search' element={<SearchPacks/>}/>
+       <Route path='book' element={<BookingForm/>}/>
+
+       
 
        </Routes>
        </BrowserRouter>
+       
     </div>
   );
 }

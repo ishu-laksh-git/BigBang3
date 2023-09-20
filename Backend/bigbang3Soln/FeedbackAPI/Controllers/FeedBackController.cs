@@ -1,11 +1,13 @@
 ﻿using FeedbackAPI.Interfaces;
 using FeedbackAPI.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FeedbackAPI.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [EnableCors("ReactCors")]
     public class FeedBackController : ControllerBase
     {
         private readonly IFeedback _feedbackrepo;

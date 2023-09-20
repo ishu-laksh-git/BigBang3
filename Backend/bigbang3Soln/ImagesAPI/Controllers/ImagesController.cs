@@ -1,5 +1,7 @@
 ﻿using Azure.Storage.Blobs;
+using ImagesAPI.Interfaces;
 using ImagesAPI.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -8,17 +10,19 @@ namespace ImagesAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("MyCors")]
     public class ImagesController : ControllerBase
     {
-        private readonly Context _context;
-        public ImagesController(Context context)
+        private readonly ITourImageService _tourService;
+        public ImagesController(ITourImageService tourService)
         {
-            _context = context;
+            _tourService = tourService;
         }
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Images>>> GetUsers()
+        [HttpGet("GettingImages")]
+        public async Task<ActionResult<IEnumerable<Images>>> GetTourIages()
         {
-            return await _context.TourImages.ToListAsync();
+            var imgs = await _tourService.GetTourImages();
+            return Ok(imgs);
         }
         /* [HttpPost]
          public async Task<IActionResult> UploadImage([FromForm] UserModel model)
@@ -45,42 +49,23 @@ namespace ImagesAPI.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> UploadImage([FromForm] Images model)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> UploadImage(int packageId, [FromForm] Images model)
         {
-            if (model.Image != null)
+            if (model.Image != null && model.Image.Count > 0)
             {
                 // Connect to Azurite Blob Storage
                 // string connectionString = "UseDevelopmentStorage=true"; // Azurite connection string
                 //BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
-
-                string connectionString = "DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://127.0.0.1:8888/devstoreaccount1;";
-                BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
-
-                BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient("samples-workitems");
-
-
-                // Create the container if it doesn't exist
-                containerClient.CreateIfNotExists();
-
-
-
-                // Generate a unique blob name
-                string uniqueBlobName = Guid.NewGuid().ToString() + Path.GetExtension(model.Image.FileName);
-
-                // Upload the image to Azure Blob Storage
-                BlobClient blobClient = containerClient.GetBlobClient(uniqueBlobName);
-                using (var stream = model.Image.OpenReadStream())
+                foreach(var image in model.Image)
                 {
-                    await blobClient.UploadAsync(stream, true);
+                    if(image != null)
+                    {
+                        await _tourService.AddTourImage(packageId, image, model.Name);
+                    }
                 }
-
-                // Set the image path to the Blob Storage URL
-                model.ImagePath = blobClient.Uri.ToString();
             }
-
-            _context.TourImages.Add(model);
-            await _context.SaveChangesAsync();
-
             return Ok();
         }
     }

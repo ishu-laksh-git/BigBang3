@@ -1,4 +1,6 @@
+using ImagesAPI.Interfaces;
 using ImagesAPI.Models;
+using ImagesAPI.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace ImagesAPI
@@ -21,6 +23,16 @@ namespace ImagesAPI
                 opts.UseSqlServer(builder.Configuration.GetConnectionString("MyConn"));
             });
 
+            builder.Services.AddScoped<IRepo<int, Images>, TourImageRepo>();
+            builder.Services.AddScoped<ITourImageService, TourImageService>();
+            builder.Services.AddCors(opts =>
+            {
+                opts.AddPolicy("AngularCORS", options =>
+                {
+                    options.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+                });
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -29,6 +41,9 @@ namespace ImagesAPI
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseAuthentication();
+            app.UseCors("AngularCORS");
 
             app.UseAuthorization();
 

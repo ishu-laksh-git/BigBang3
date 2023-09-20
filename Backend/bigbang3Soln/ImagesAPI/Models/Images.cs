@@ -12,6 +12,6 @@ namespace ImagesAPI.Models
         public string? ImagePath { get; set; }
 
         [NotMapped]
-        public IFormFile Image { get; set; }
+        public List<IFormFile> Image { get; set; }
     }
 }

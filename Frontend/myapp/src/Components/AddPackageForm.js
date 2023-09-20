@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Home.css";
+import { ToastContainer, toast } from 'react-toastify';
 import logo from "../Assets/logo.png";
 import {BsInstagram,BsFacebook,BsMap,BsTelephone,BsEnvelope,BsPinMap,BsLinkedin,BsYoutube,BsTwitter} from "react-icons/bs";
 import { BsPersonFill,BsPlusCircle } from 'react-icons/bs';
@@ -7,8 +8,104 @@ import "./AgentPackages.css";
 
 
 function AddPackageForm(){
+  var[packages,setpackages]=useState({
+    
+      "agencyId": 0,
+      "destination": "",
+      "departureCity": "",
+      "fromDate": "",
+      "toDate": "",
+      "no_Days": 0,
+      "no_Nights": 0,
+      "foodIncluded": "",
+      "accommodationIncluded": "",
+      "tourType": "",
+      "description": "",
+      "available": 0,
+      "price": 0
+     
+    
+  });
+  const[itenary,setItenary]=useState({
+    
+      "packageId": 0,
+      "day": "",
+      "activity": ""
+    
+  })
+  const AddPackage = (event) => {
+    event.preventDefault(); // Prevent form submission
+
+    console.log(packages);
+
+    fetch("http://localhost:5017/api/Package/AddPackage", {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(packages)
+    })
+      .then(async (response) => {
+        if (response.status === 201) {
+          console.log(response.status);
+          const data = await response.json();
+          console.log(data);
+          localStorage.setItem("packId",data.packageId);
+          toast.success("Added! :)", {
+            position: toast.POSITION.TOP_CENTER
+          });
+          
+        } else {
+          toast.error("Not added", {
+            position: toast.POSITION.TOP_CENTER
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const AddItenary = (event) => {
+    event.preventDefault(); // Prevent form submission
+    console.log(localStorage.getItem("packId"));
+    const packId = localStorage.getItem("packId");
+    itenary.packageId = parseInt(packId);
+    console.log(itenary.packageId);
+
+    fetch("http://localhost:5017/api/Itenary/AddItenary", {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(itenary)
+    })
+      .then(async (response) => {
+        if (response.status === 201) {
+          console.log(response.status);
+          const data = await response.json();
+          console.log(data);
+          toast.success("Added! :)", {
+            position: toast.POSITION.TOP_CENTER
+          });
+          
+        } else {
+          toast.error("Not added", {
+            position: toast.POSITION.TOP_CENTER
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+
     return(
         <section className="gradient-custom">
+          <ToastContainer/>
       {/* Navbar */}
       <nav className="navbar home-navbar navbar-expand-lg navbar-light bg-white" id="home-navbar">
                 <div className="logo-img-container">
@@ -47,28 +144,36 @@ function AddPackageForm(){
             <div className="card shadow-2-strong card-registration">
               <div className="card-body p-4 p-md-5">
                 <h3 className="mb-4 pb-2 pb-md-0 mb-md-5">Add package Form</h3>
-                <form>
+                <form onSubmit={AddPackage}>
                   <div className="row">
                     <div className="col-md-6 mb-2">
                       <div className="form-outline">
-                        <input type="text" id="Name" className="form-control form-control-md" placeholder="Destination"/>
+                        <input type="text" id="Name" className="form-control form-control-md" placeholder="Destination" onChange={(event) => {
+                          setpackages({ ...packages,destination: event.target.value })
+                        }} />
                       </div>
                     </div>
                     <div className="col-md-6 mb-2">
                       <div className="form-outline">
-                        <input type="number" id="Speciality" className="form-control form-control-md" placeholder="AgencyId"/>
+                        <input type="number" id="Speciality" className="form-control form-control-md" placeholder="AgencyId" onChange={(event) => {
+                          setpackages({ ...packages,agencyId: event.target.value })
+                        }} />
                       </div>
                     </div>
                   </div>
                   <div className="row">
                   <div className="col-md-6 mb-2">
                       <div className="form-outline">
-                        <input type="text" id="Name" className="form-control form-control-md" placeholder="DepartureCity"/>
+                        <input type="text" id="Name" className="form-control form-control-md" placeholder="DepartureCity" onChange={(event) => {
+                          setpackages({ ...packages,departureCity: event.target.value })
+                        }} />
                       </div>
                     </div>
                     <div className="col-md-6 mb-2">
                       <div className="form-outline">
-                        <select id="Type" className="form-control form-control-md">
+                        <select id="Type" className="form-control form-control-md" onChange={(event) => {
+                          setpackages({ ...packages,type: event.target.value })
+                        }} >
                           <option value="">Type</option>
                           <option value="public">Public</option>
                           <option value="private">Private</option>
@@ -82,13 +187,17 @@ function AddPackageForm(){
                     <div className="col-md-6 mb-2">
                         From
                       <div className="form-outline">
-                        <input type="date" id="DateOfBirth" className="form-control form-control-md" placeholder="FromDate"/>
+                        <input type="date" id="DateOfBirth" className="form-control form-control-md" placeholder="FromDate" onChange={(event) => {
+                          setpackages({ ...packages,fromDate: event.target.value })
+                        }} />
                       </div>
                     </div>
                     <div className="col-md-6 mb-2">
                       <div className="form-outline">
                         To
-                        <input type="date" id="DateOfBirth" className="form-control form-control-md" placeholder="ToDate"/>
+                        <input type="date" id="DateOfBirth" className="form-control form-control-md" placeholder="ToDate" onChange={(event) => {
+                          setpackages({ ...packages,toDate: event.target.value })
+                        }} />
                       </div>
                     </div>
                   </div>
@@ -98,25 +207,16 @@ function AddPackageForm(){
                   <div className="row">
                     <div className="col-md-6 mb-2">
                       <div className="form-outline">
-                        <input type="text" id="Email" className="form-control form-control-md" placeholder="no. of days"/>
+                        <input type="text" id="Email" className="form-control form-control-md" placeholder="no. of days" onChange={(event) => {
+                          setpackages({ ...packages,no_Days: event.target.value })
+                        }} />
                       </div>
                     </div>
                     <div className="col-md-6 mb-2">
                       <div className="form-outline">
-                        <input type="text" id="Phone" className="form-control form-control-md" placeholder="no. of nights"/>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="row">
-                    <div className="col-md-6 mb-2">
-                      <div className="form-outline">
-                        <input type="text" id="Address" className="form-control form-control-md" placeholder="food incl/"/>
-                      </div>
-                    </div>
-                    <div className="col-md-6 mb-2">
-                      <div className="form-outline">
-                        <input type="text" id="Experience" className="form-control form-control-md" placeholder="Accomodation incl/"/>
+                        <input type="text" id="Phone" className="form-control form-control-md" placeholder="no. of nights" onChange={(event) => {
+                          setpackages({ ...packages,no_Nights: event.target.value })
+                        }} />
                       </div>
                     </div>
                   </div>
@@ -124,12 +224,33 @@ function AddPackageForm(){
                   <div className="row">
                     <div className="col-md-6 mb-2">
                       <div className="form-outline">
-                        <input type="number" id="Password" className="form-control form-control-md" placeholder="available seats"/>
+                        <input type="text" id="Address" className="form-control form-control-md" placeholder="food incl/" onChange={(event) => {
+                          setpackages({ ...packages,foodIncluded: event.target.value })
+                        }} />
                       </div>
                     </div>
                     <div className="col-md-6 mb-2">
                       <div className="form-outline">
-                        <input type="text" id="ConfirmPassword" className="form-control form-control-md" placeholder="price" />
+                        <input type="text" id="Experience" className="form-control form-control-md" placeholder="Accomodation incl/" onChange={(event) => {
+                          setpackages({ ...packages,accommodationIncluded: event.target.value })
+                        }} />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="row">
+                    <div className="col-md-6 mb-2">
+                      <div className="form-outline">
+                        <input type="number" id="Password" className="form-control form-control-md" placeholder="available seats" onChange={(event) => {
+                          setpackages({ ...packages,available: event.target.value })
+                        }} />
+                      </div>
+                    </div>
+                    <div className="col-md-6 mb-2">
+                      <div className="form-outline">
+                        <input type="text" id="ConfirmPassword" className="form-control form-control-md" placeholder="price"  onChange={(event) => {
+                          setpackages({ ...packages,price: event.target.value })
+                        }} />
                       </div>
                     </div>
                   </div>
@@ -141,7 +262,9 @@ function AddPackageForm(){
                       className="form-control form-control-md"
                       placeholder="Description"
                       rows="4" // Adjust the number of rows as needed
-                    ></textarea>                      </div>
+                      onChange={(event) => {
+                        setpackages({ ...packages,description: event.target.value })
+                      }} ></textarea>                      </div>
                     <br/>
 
                   <div>
@@ -161,26 +284,25 @@ function AddPackageForm(){
             <div className="card shadow-2-strong card-registration">
               <div className="card-body p-4 p-md-5">
                 <h3 className="mb-4 pb-2 pb-md-0 mb-md-5">Itenary</h3>
-                <form>
+                <form onSubmit={AddItenary}>
                   <div className="row">
-                    <div className="col-md-6 mb-2">
+                    
                       <div className="form-outline">
-                        <input type="number" id="Name" className="form-control form-control-md" placeholder="packageId"/>
-                      </div>
-                    </div>
-                    <div className="col-md-6 mb-2">
-                      <div className="form-outline">
-                        <input type="text" id="DateOfBirth" className="form-control form-control-md" placeholder="Day"/>
-                      </div>
+                        <input type="text" id="DateOfBirth" className="form-control form-control-md" placeholder="Day" onChange={(event) => {
+                          setItenary({ ...itenary,day: event.target.value })
+                        }} />
+                      
                     </div>
                   </div>
-
+<br/>
                   <div className="row">
                     
                     
                     
                       <div className="form-outline">
-                        <input type="text" id="Email" className="form-control form-control-md" placeholder="Activity"/>
+                        <input type="text" id="Email" className="form-control form-control-md" placeholder="Activity" onChange={(event) => {
+                          setItenary({ ...itenary,activity: event.target.value })
+                        }} />
                      
                     </div>
                   </div>

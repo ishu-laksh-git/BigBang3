@@ -1,5 +1,6 @@
 import React from "react";
 import "./Home.css";
+import { Link, useNavigate } from "react-router-dom";
 import around from "../Assets/around.jpg";
 import city from "../Assets/city.jpg"
 import city2 from "../Assets/city2.jpg";
@@ -7,8 +8,11 @@ import forest from "../Assets/forest.jpg";
 import two from "../Assets/two.jpg";
 import logo from "../Assets/logo.png";
 import {BsInstagram,BsFacebook,BsMap,BsTelephone,BsPersonFill,BsEnvelope,BsPinMap,BsLinkedin,BsYoutube,BsTwitter} from "react-icons/bs";
+import { Navigate } from "react-router-dom";
 
 function TravellerLand() {
+    const navigate=useNavigate();
+    var find=()=>{navigate("/search");}
     return (
         
         <div className="home-container">
@@ -89,7 +93,7 @@ function TravellerLand() {
                             DISCOVER | YOURSELF
                         </p>
                          {/* Sign In button */}
-                         <button className="home-sign-in btn btn-dark text-white btn-lg">Find destinations</button>
+                         <button className="home-sign-in btn btn-dark text-white btn-lg" onClick={find}>Find destinations</button>
                     </div>
                 </div>
 
